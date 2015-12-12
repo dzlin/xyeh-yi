@@ -1,5 +1,11 @@
 <?php
 
+namespace application\models;
+
+use CActiveDataProvider;
+use CActiveRecord;
+use CDbCriteria;
+
 /**
  * This is the model class for table "{{user}}".
  *
