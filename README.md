@@ -13,3 +13,7 @@
 - 导入 `data/xyeh.sql` 数据库
 
 - 配置 `system/config/db.php` 数据库连接信息
+
+## License
+
+MIT
