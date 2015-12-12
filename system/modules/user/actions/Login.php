@@ -29,7 +29,8 @@ class Login extends Base
     {
         if (Yii::app()->request->isPostRequest) {
             if ($this->data()) {
-                die('ok');
+                var_dump(Yii::app()->user);
+                die;
             }
             $this->controller->error($this->msg);
         }

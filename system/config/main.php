@@ -7,6 +7,9 @@ return array(
     'preload' => array('log'),
     'defaultController' => 'main/index/index',
     'components' => array(
+        'request' => array(
+            'enableCsrfValidation' => true,
+        ),
         'user' => array(
             'allowAutoLogin' => true,
         ),
@@ -15,7 +18,7 @@ return array(
         // 	'errorAction'=>'site/error',
         // ),
         'urlManager' => array(
-            'urlFormat' => 'get',
+            'urlFormat' => 'path',
             'caseSensitive' => false,
             'showScriptName' => false,
             'rules' => array(

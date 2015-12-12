@@ -15,7 +15,13 @@ class Controller extends CController
      * 布局文件
      * @var string
      */
-    public $layout = 'main';
+    public $layout = 'application.views.layouts.main';
+
+    /**
+     * 模块静态资源文件路径
+     * @var string
+     */
+    private $_assetsUrl;
 
     /**
      * 用户登录检查
@@ -46,6 +52,21 @@ class Controller extends CController
 //        $viewFile = $this->resolveViewFile('error', $viewPath, $basePath);
 //        $output = $this->renderFile($viewFile, $params, true);
 //        echo $output;
+    }
+
+    public function getAssetsUrl()
+    {
+        if ($this->_assetsUrl === null) {
+            $module = Yii::app()->controller->module->id;
+            $path = 'application.modules.' . $module . '.assets';
+            $this->_assetsUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias($path));
+        }
+        return $this->_assetsUrl;
+    }
+
+    public function setAssetsUrl($value)
+    {
+        $this->_assetsUrl = $value;
     }
 
 }
