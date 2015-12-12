@@ -1,12 +1,13 @@
 <?php
+
 namespace application\modules\main\controllers;
 
-use application\core\Controller;
-
-class IndexController extends Controller
+class IndexController extends BaseController
 {
+
     public function actionIndex()
     {
         $this->render('index');
     }
+
 }

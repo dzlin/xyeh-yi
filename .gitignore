@@ -7,7 +7,7 @@ themes/classic/views/
 system/runtime/*
 !system/runtime/.gitignore
 library/*
-
+nbproject/*
 
 # =========================
 # Operating System Files

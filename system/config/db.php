@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'connectionString' => 'mysql:host=localhost;dbname=xyeh',
     'emulatePrepare' => true,
