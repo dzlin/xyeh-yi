@@ -4,6 +4,10 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+system/runtime/*
+!system/runtime/.gitignore
+library/*
+
 
 # =========================
 # Operating System Files
