@@ -14,8 +14,6 @@
 
 namespace application\modules\user\controllers;
 
-use Yii;
-
 /**
  * Description of IndexController
  *
@@ -30,6 +28,7 @@ class IndexController extends BaseController
         return array(
             'login' => 'application\modules\user\actions\Login',
             'register' => 'application\modules\user\actions\Register',
+            'active' => 'application\modules\user\actions\Active',
         );
     }
 

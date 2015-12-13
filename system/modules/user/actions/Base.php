@@ -27,6 +27,11 @@ class Base extends Action
 {
 
     /**
+     * 注册激活码长度
+     */
+    const ACTIVE_CODE_LENGTH = 32;
+
+    /**
      * 登陆邮箱
      * @var string
      */
@@ -51,6 +56,12 @@ class Base extends Action
     protected $msg = null;
 
     /**
+     * 用户id
+     * @var integer
+     */
+    protected $uid = 0;
+
+    /**
      * 邮箱格式验证
      */
     protected function email()
@@ -66,6 +77,19 @@ class Base extends Action
         return preg_match("/^\w{6,24}$/", $this->password) === 1;
     }
 
+    /**
+     * 加密登陆密码
+     * @return string
+     */
+    protected function encryptPassword()
+    {
+        return md5(sha1($this->password));
+    }
+
+    /**
+     * 登陆或是注册表单数据
+     * @return boolean
+     */
     protected function data()
     {
         $this->email = htmlspecialchars(trim(Env::getParam('email')));

@@ -7,22 +7,20 @@ use CActiveRecord;
 use CDbCriteria;
 
 /**
- * This is the model class for table "{{user}}".
+ * This is the model class for table "{{user_active}}".
  *
- * The followings are the available columns in table '{{user}}':
+ * The followings are the available columns in table '{{user_active}}':
  * @property string $id
- * @property string $email
- * @property string $password
- * @property string $register_time
- * @property integer $status
+ * @property string $uid
+ * @property string $code
  */
-class User extends CActiveRecord
+class UserActive extends CActiveRecord
 {
 
     /**
      * 表名
      */
-    const TABLE_NAME = '{{user}}';
+    const TABLE_NAME = '{{user_active}}';
 
     /**
      * @return string the associated database table name
@@ -40,13 +38,11 @@ class User extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('status', 'numerical', 'integerOnly' => true),
-            array('email', 'length', 'max' => 255),
-            array('password', 'length', 'max' => 32),
-            array('register_time', 'length', 'max' => 10),
+            array('uid', 'length', 'max' => 10),
+            array('code', 'length', 'max' => 32),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, email, password, register_time, status', 'safe', 'on' => 'search'),
+            array('id, uid, code', 'safe', 'on' => 'search'),
         );
     }
 
@@ -68,10 +64,8 @@ class User extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'email' => 'Email',
-            'password' => 'Password',
-            'register_time' => 'Register Time',
-            'status' => 'Status',
+            'uid' => 'Uid',
+            'code' => 'Code',
         );
     }
 
@@ -94,10 +88,8 @@ class User extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('email', $this->email, true);
-        $criteria->compare('password', $this->password, true);
-        $criteria->compare('register_time', $this->register_time, true);
-        $criteria->compare('status', $this->status);
+        $criteria->compare('uid', $this->uid, true);
+        $criteria->compare('code', $this->code, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -108,25 +100,11 @@ class User extends CActiveRecord
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return User the static model class
+     * @return UserActive the static model class
      */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
-    }
-
-    // ====================================================================
-
-    /**
-     * 检查邮箱是否已经存在
-     * @param string $email
-     * @return boolean
-     */
-    public function existsEmail($email)
-    {
-        $condition = 'email=:email';
-        $params = array(':email' => $email);
-        return $this->exists($condition, $params);
     }
 
 }

@@ -38,6 +38,7 @@ class BaseController extends Controller
         $action = array(
             'login',
             'register',
+            'active',
         );
         return in_array($id, $action);
     }

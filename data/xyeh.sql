@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-12-12 15:38:10
+Date: 2015-12-13 20:53:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -164,6 +164,32 @@ CREATE TABLE `xyeh_step` (
 -- ----------------------------
 DROP TABLE IF EXISTS `xyeh_user`;
 CREATE TABLE `xyeh_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+  `password` varchar(32) DEFAULT NULL COMMENT '密码',
+  `register_time` int(10) unsigned DEFAULT '0' COMMENT '注册时间',
+  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '用户状态，默认0（不可用），1可用',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`) USING BTREE COMMENT '邮箱唯一索引'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='基本用户信息表';
+
+-- ----------------------------
+-- Table structure for xyeh_user_active
+-- ----------------------------
+DROP TABLE IF EXISTS `xyeh_user_active`;
+CREATE TABLE `xyeh_user_active` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `code` char(32) DEFAULT NULL COMMENT '注册激活码，32位随机字符串',
+  PRIMARY KEY (`id`),
+  KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户激活码表';
+
+-- ----------------------------
+-- Table structure for xyeh_user_bak
+-- ----------------------------
+DROP TABLE IF EXISTS `xyeh_user_bak`;
+CREATE TABLE `xyeh_user_bak` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `truename` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nikename` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,

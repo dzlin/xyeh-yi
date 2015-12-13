@@ -6,6 +6,7 @@ return array(
     'name' => 'xyeh',
     'preload' => array('log'),
     'defaultController' => 'main/index/index',
+    'timeZone' => 'PRC',
     'components' => array(
         'request' => array(
             'enableCsrfValidation' => true,

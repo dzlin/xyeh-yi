@@ -74,4 +74,14 @@ class Env
         return $mailer->Send();                  // 发送 @return boolean
     }
 
+    /**
+     * 生成随机字符串[0-9a-zA-z_~]
+     * @param integer $length 字符串长度，默认8
+     * @return string
+     */
+    public static function randStr($length = 8)
+    {
+        return Yii::app()->securityManager->generateRandomString($length);
+    }
+
 }
