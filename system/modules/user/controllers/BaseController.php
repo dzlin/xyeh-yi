@@ -37,6 +37,7 @@ class BaseController extends Controller
     {
         $action = array(
             'login',
+            'register',
         );
         return in_array($id, $action);
     }

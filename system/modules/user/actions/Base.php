@@ -39,6 +39,12 @@ class Base extends Action
     protected $password = null;
 
     /**
+     * 确认密码
+     * @var string
+     */
+    protected $repassword = null;
+
+    /**
      * 提示信息
      * @var string
      */
@@ -64,6 +70,7 @@ class Base extends Action
     {
         $this->email = htmlspecialchars(trim(Env::getParam('email')));
         $this->password = htmlspecialchars(trim(Env::getParam('password')));
+        $this->repassword = htmlspecialchars(trim(Env::getParam('repassword')));
         return $this->dataCheck();
     }
 
@@ -80,7 +87,23 @@ class Base extends Action
             $this->msg = '密码格式错误';
             return false;
         }
+        if ($this->controller->action->id == 'register' && !$this->repassword()) {
+            $this->msg = '两次密码不一致';
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * 两次密码是否一致
+     * @return boolean
+     */
+    protected function repassword()
+    {
+        if ($this->password !== null && $this->repassword !== null) {
+            return $this->password === $this->repassword;
+        }
+        return false;
     }
 
 }
