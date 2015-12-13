@@ -14,6 +14,24 @@
 
 - 配置 `system/config/db.php` 数据库连接信息
 
+## 邮件发送配置
+
+- 在 `system/config` 目录下新建文件 `email.php`
+
+- 在 `email.php` 写入，并配置你的邮箱
+
+```php
+<?php
+
+return array(
+    'host' => 'smtp.domain.com',//smtp邮箱服务器地址
+    'port' => '456',//端口
+    'username' => 'your email username',//邮箱账号
+    'password' => 'your email password',//邮箱密码
+    'from' => 'username@domain.com',//发件人
+    'reply' => 'username@domain.com',//回复邮箱
+);
+```
 ## License
 
 MIT
