@@ -26,6 +26,14 @@ class Env
 {
 
     /**
+     * header('Content-Type:text/html;charset=utf-8')
+     */
+    public static function utf8Charset()
+    {
+        header('Content-Type:text/html;charset=utf-8');
+    }
+
+    /**
      * 获取get或是post数据
      * @param string $name
      * @param mixed $default

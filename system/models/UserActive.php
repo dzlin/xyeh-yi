@@ -107,4 +107,14 @@ class UserActive extends CActiveRecord
         return parent::model($className);
     }
 
+    /**
+     * 
+     * @param type $code
+     * @return type
+     */
+    public function fetchUidByCode($code)
+    {
+        return $this->find('code=:code', array(':code' => $code));
+    }
+
 }

@@ -15,6 +15,8 @@
 namespace application\modules\user\actions;
 
 use application\core\util\Env;
+use application\models\User;
+use application\models\UserActive;
 use Yii;
 
 /**
@@ -38,6 +40,11 @@ class Active extends Base
         $this->email = $this->decryptEmail($enEmail);
         $enCode = Env::getParam('code');
         $this->code = $this->decryptCode($enCode);
+        if ($this->active()) {
+            echo 'active success';
+            die;
+        }
+        echo 'active failed';
     }
 
     /**
@@ -47,7 +54,7 @@ class Active extends Base
      */
     protected function decryptEmail($enEmail)
     {
-        return base64_decode(Yii::app()->securityManager->decrypt($enEmail));
+        return Yii::app()->securityManager->decrypt(base64_decode($enEmail));
     }
 
     /**
@@ -57,7 +64,7 @@ class Active extends Base
      */
     protected function decryptCode($enCode)
     {
-        return base64_decode(Yii::app()->securityManager->decrypt($enCode));
+        return Yii::app()->securityManager->decrypt(base64_decode($enCode));
     }
 
     /**
@@ -66,6 +73,17 @@ class Active extends Base
      */
     protected function active()
     {
+        $model = UserActive::model();
+        $active = $model->fetchUidByCode($this->code);
+        if ($active) {
+            unset($model);
+            $model = User::model();
+            $user = $model->findByPk($active->id);
+            if ($user && $user->email == $this->email) {
+                $user->status = User::STATUS_ENABLE;
+                return $user->save();
+            }
+        }
         return false;
     }
 

@@ -27,16 +27,21 @@ return array(
             )
         ),
         'log' => array(
-            'class' => 'CLogRouter',
+            'class' => '\CLogRouter',
             'routes' => array(
                 array(
-                    'class' => 'CFileLogRoute',
+                    'class' => '\CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
-            // uncomment the following to show log messages on web pages
-            //array(
-            //	'class'=>'CWebLogRoute',
-            //),
+                // uncomment the following to show log messages on web pages
+//                array(
+//                    'class' => '\CWebLogRoute',
+//                    'levels' => 'trace',
+//                    'categories' => 'system.db.*',
+//                ),
+                array(
+                    'class' => '\CProfileLogRoute',
+                ),
             ),
         ),
     ),

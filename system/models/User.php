@@ -25,6 +25,16 @@ class User extends CActiveRecord
     const TABLE_NAME = '{{user}}';
 
     /**
+     * 用户禁用
+     */
+    const STATUS_DISABLE = 0;
+
+    /**
+     * 用户可用
+     */
+    const STATUS_ENABLE = 1;
+
+    /**
      * @return string the associated database table name
      */
     public function tableName()
